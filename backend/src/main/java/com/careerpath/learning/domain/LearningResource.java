@@ -42,4 +42,7 @@ public class LearningResource {
     public String getDifficulty() { return difficulty; } public String getEstimatedDuration() { return estimatedDuration; }
     public String getDescription() { return description; } public int getDisplayOrder() { return displayOrder; }
     public boolean isVerified() { return verified; } public Instant getLastCheckedAt() { return lastCheckedAt; }
+    public void refresh(String title, String provider, String resourceType, String url, String language, String costType, String difficulty, String estimatedDuration, String description) {
+        this.title = title; this.provider = provider; this.resourceType = resourceType; this.url = url; this.language = language; this.costType = costType; this.difficulty = difficulty; this.estimatedDuration = estimatedDuration; this.description = description; this.verified = true; this.lastCheckedAt = Instant.now();
+    }
 }

@@ -61,3 +61,5 @@ button { background: #4b56c8; border: 0; border-radius: 8px; color: #fff; cursor
 
 @media (max-width: 800px) { .app-shell { grid-template-columns: 1fr; } .sidebar { gap: 14px; padding: 14px; } nav { display: flex; flex-wrap: wrap; margin-top: 0; } .nav-item { padding: 8px 9px; } .student-summary { display: none; } .career-card, .dashboard-grid { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .topbar, .content { padding-left: 16px; padding-right: 16px; } .stats { gap: 7px; } .stats article { padding: 10px; } .career-card { padding: 16px; } }
+
+.brand-mark { height: 36px; width: 36px; }

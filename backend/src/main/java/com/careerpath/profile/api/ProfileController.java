@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/profile")
@@ -33,6 +35,10 @@ public class ProfileController {
     public ProfileResponse updateProfile(Principal principal, @Valid @RequestBody UpdateProfileRequest request) {
         return profileService.updateProfile(principal.getName(), request);
     }
+    @org.springframework.web.bind.annotation.PostMapping(value = "/cv", consumes = "multipart/form-data")
+    public ProfileResponse uploadCv(Principal principal, @RequestParam("file") MultipartFile file) { return profileService.uploadCv(principal.getName(), file); }
+    @GetMapping("/cv-text") public ProfileService.CvTextResponse cvText(Principal principal) { return profileService.getCvText(principal.getName()); }
+    @PutMapping("/cv-text") public ProfileService.CvTextResponse updateCvText(Principal principal, @Valid @RequestBody CvTextRequest request) { return profileService.updateCvText(principal.getName(), request.text()); }
 
     @GetMapping("/github-repositories")
     public List<GithubProjectImportService.GithubRepository> githubRepositories(Principal principal) {
@@ -54,9 +60,10 @@ public class ProfileController {
     }
 
     public record ProfileResponse(String fullName, String university, String academicYear,
-            String githubUrl, String linkedinUrl, String targetCareer) {
+            String githubUrl, String linkedinUrl, String targetCareer, String cvFileName) {
     }
 
     public record GithubImportRequest(@jakarta.validation.constraints.NotEmpty List<GithubProjectImportService.GithubRepositoryInput> repositories) {
     }
+    public record CvTextRequest(@Size(max = 20000) String text) { }
 }

@@ -14,3 +14,5 @@ button { background: #4b56c8; border: 0; border-radius: 8px; color: #fff; cursor
 .switch-copy { color: #69758a; font-size: 12px; margin: 20px 0 0; text-align: center; } .switch-copy a { color: #4b56c8; font-weight: 650; text-decoration: none; }
 @media (max-width: 550px) { .auth-shell { align-items: start; padding: 95px 16px 24px; } .brand { left: 16px; top: 18px; } .auth-card { padding: 21px; } }
 
+
+.brand > img { height: 30px; width: 30px; }

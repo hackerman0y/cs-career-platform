@@ -1,5 +1,5 @@
 <main class="auth-shell">
-  <a routerLink="/dashboard" class="brand"><span>Ｃ</span>CareerPath <small>Beta</small></a>
+  <a routerLink="/dashboard" class="brand"><img src="assets/careera-mark.svg" alt="">Careera <small>Beta</small></a>
   <section class="auth-card">
     <p class="eyebrow">{{ mode === 'register' ? 'Start your journey' : 'Welcome back' }}</p>
     <h1>{{ mode === 'register' ? 'Create your account.' : 'Continue your progress.' }}</h1>
@@ -19,4 +19,3 @@
     <p class="switch-copy">@if (mode === 'register') { Already have an account? <a routerLink="/login">Sign in</a> } @else { New here? <a routerLink="/register">Create an account</a> }</p>
   </section>
 </main>
-

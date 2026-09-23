@@ -7,4 +7,5 @@ export interface StudentProfile {
   githubUrl: string;
   linkedinUrl: string;
   targetCareer: CareerPath;
+  cvFileName: string;
 }

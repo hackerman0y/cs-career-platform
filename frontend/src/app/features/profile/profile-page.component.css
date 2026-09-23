@@ -20,6 +20,14 @@ h2 { font-size: 16px; letter-spacing: -.02em; margin-bottom: 4px; }
 .field-wide { grid-column: 1 / -1; }
 .field input, .field select { background: #fff; border: 1px solid #dfe4ed; border-radius: 8px; color: #1b2434; font-size: 13px; min-height: 40px; outline: none; padding: 9px 10px; }
 .field input:focus, .field select:focus { border-color: #737df0; box-shadow: 0 0 0 3px #737df022; }
+.skill-form { display:grid; gap:10px; grid-template-columns:1fr 150px auto; }.skill-input-wrap { position:relative; }
+.skill-form input, .skill-form select { background:#fff; border:1px solid #dfe4ed; border-radius:8px; box-sizing:border-box; font-size:13px; min-height:40px; padding:9px 10px; width:100%; }
+.skill-suggestions { background:#fff; border:1px solid #dfe4ed; border-radius:9px; box-shadow:0 10px 20px #27304a18; left:0; overflow:hidden; position:absolute; right:0; top:calc(100% + 5px); z-index:5; }.skill-suggestions button { background:#fff; border-radius:0; color:#1b2434; display:block; padding:9px 10px; text-align:left; width:100%; }.skill-suggestions button:hover { background:#f4f4ff; }.skill-suggestions strong,.skill-suggestions small { display:block; }.skill-suggestions strong { font-size:12px; }.skill-suggestions small { color:#69758a; font-size:10px; font-weight:400; margin-top:2px; }
+.skill-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.skill-chip { align-items:center; background:#f2f3ff; border:1px solid #d9dcff; border-radius:999px; display:inline-flex; gap:6px; padding:6px 8px 6px 10px; }
+.skill-chip strong { font-size:12px; }.skill-chip small { color:#5c6590; font-size:10px; text-transform:capitalize; }.skill-chip button { background:transparent; color:#4b56c8; font-size:16px; line-height:1; padding:0 2px; }.empty-skills { color:#69758a; font-size:12px; margin:0; }
+.upload-control { align-items:center; background:#f2f3ff; border:1px solid #d9dcff; border-radius:8px; color:#3542bd; cursor:pointer; display:inline-flex; font-size:12px; font-weight:650; margin-top:10px; padding:10px 13px; }.upload-control input { display:none; }.cv-status,.cv-message { color:#287343; font-size:12px; margin:0; }.cv-message { margin-top:9px; }
+.cv-text-label { color:#364154; display:grid; font-size:12px; font-weight:600; gap:7px; margin-top:15px; }.cv-text-label textarea { border:1px solid #dfe4ed; border-radius:8px; font:inherit; padding:10px; resize:vertical; }.cv-text-save { margin-top:9px; }
 .optional { color: #9aa4b4; font-size: 10px; font-weight: 500; }
 .error { color: #b42318; font-size: 11px; font-weight: 500; }
 .career-grid { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -33,4 +41,6 @@ h2 { font-size: 16px; letter-spacing: -.02em; margin-bottom: 4px; }
 .save-error { color: #b42318; font-size: 12px; margin: 0; }
 .form-actions a { color: #69758a; font-size: 12px; font-weight: 600; text-decoration: none; }
 button { background: #4b56c8; border: 0; border-radius: 8px; color: #fff; cursor: pointer; font-size: 12px; font-weight: 650; padding: 10px 14px; }
-@media (max-width: 560px) { .profile-header { padding: 14px 16px; } .profile-content { padding: 30px 16px 40px; } .form-card { padding: 16px; } .field-grid, .career-grid { grid-template-columns: 1fr; } .field-wide { grid-column: auto; } }
+@media (max-width: 560px) { .profile-header { padding: 14px 16px; } .profile-content { padding: 30px 16px 40px; } .form-card { padding: 16px; } .field-grid, .career-grid, .skill-form { grid-template-columns: 1fr; } .field-wide { grid-column: auto; } }
+
+.brand > img { height: 30px; width: 30px; }

@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.UUID;
@@ -37,6 +38,12 @@ public class StudentProfile {
     @Column(nullable = false, length = 60)
     private String targetCareer;
 
+    @Column(length = 180)
+    private String cvFileName;
+
+    @Lob
+    private String cvText;
+
     protected StudentProfile() {
     }
 
@@ -50,6 +57,8 @@ public class StudentProfile {
         profile.githubUrl = "";
         profile.linkedinUrl = "";
         profile.targetCareer = "Frontend Developer";
+        profile.cvFileName = "";
+        profile.cvText = "";
         return profile;
     }
 
@@ -61,6 +70,8 @@ public class StudentProfile {
     public String getGithubUrl() { return githubUrl; }
     public String getLinkedinUrl() { return linkedinUrl; }
     public String getTargetCareer() { return targetCareer; }
+    public String getCvFileName() { return cvFileName; }
+    public String getCvText() { return cvText; }
 
     public void update(String fullName, String university, String academicYear, String githubUrl, String linkedinUrl,
             String targetCareer) {
@@ -71,5 +82,6 @@ public class StudentProfile {
         this.linkedinUrl = linkedinUrl;
         this.targetCareer = targetCareer;
     }
+    public void attachCv(String cvFileName) { this.cvFileName = cvFileName; }
+    public void updateCvText(String cvText) { this.cvText = cvText; }
 }
-

@@ -54,7 +54,7 @@ class CareerPlatformJourneyTest {
                 .andExpect(jsonPath("$.length()").value(2)).andExpect(jsonPath("$[0].provider").value("LinkedIn"));
 
         String resources = mvc.perform(get("/api/roadmap/{id}/resources", stepId).header("Authorization", bearer))
-                .andExpect(status().isOk()).andExpect(jsonPath("$.length()").value(1))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.length()").value(3))
                 .andReturn().getResponse().getContentAsString();
         assertThat(json.readTree(resources).get(0).get("provider").asText()).isEqualTo("YouTube");
 

@@ -13,7 +13,8 @@ const defaultProfile: StudentProfile = {
   academicYear: 'Year 2',
   githubUrl: '',
   linkedinUrl: '',
-  targetCareer: 'Frontend Developer'
+  targetCareer: 'Frontend Developer',
+  cvFileName: ''
 };
 
 @Injectable({ providedIn: 'root' })
@@ -38,7 +39,8 @@ export class StudentProfileStore {
       return of(profile);
     }
 
-    return this.http.put<StudentProfile>(`${apiUrl}/profile`, profile).pipe(tap((savedProfile) => this.saveLocally(savedProfile)));
+    const { cvFileName, ...request } = profile;
+    return this.http.put<StudentProfile>(`${apiUrl}/profile`, request).pipe(tap((savedProfile) => this.saveLocally(savedProfile)));
   }
 
   private saveLocally(profile: StudentProfile): void {

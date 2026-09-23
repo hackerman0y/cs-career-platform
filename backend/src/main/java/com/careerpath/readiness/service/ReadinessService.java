@@ -53,8 +53,7 @@ public class ReadinessService {
         rules.add(rule("portfolio", 15, published, "Published portfolio", "Publish your portfolio after adding your strongest work."));
         long completedRoadmap = roadmapProgress.findByUser(user).stream().filter(p -> p.isCompleted()).count();
         rules.add(rule("roadmap", 10, completedRoadmap >= 2, "Roadmap progress", "Complete two practical roadmap steps to build momentum."));
-        long completedChecklist = checklistProgress.findByUser(user).stream().filter(p -> p.isCompleted()).count();
-        rules.add(rule("job-preparation", 10, completedChecklist >= 4, "Job preparation", "Complete four readiness tasks including CV, LinkedIn, and interview preparation."));
+        rules.add(rule("cv", 10, present(profile.getCvFileName()), "CV attached", "Upload a PDF CV so you have evidence ready to tailor for applications."));
 
         evidence.deleteByUser(user);
         int score = 0;

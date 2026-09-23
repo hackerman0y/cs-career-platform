@@ -85,6 +85,17 @@ public class SeedDataConfig {
                 String query = (career + " " + step.getTitle() + " tutorial").replace(" ", "+");
                 resources.save(new LearningResource(step, step.getTitle() + " learning playlist", "YouTube", "playlist", "https://www.youtube.com/results?search_query=" + query, "English", "free", "beginner", "1-3 hours", "Start with a practical video lesson, then complete the roadmap deliverable.", 1));
             }
+            if (!resources.existsByRoadmapStepIdAndDisplayOrder(step.getId(), 2)) {
+                resources.save(new LearningResource(step, step.getTitle() + " official documentation", documentationProvider(career), "documentation", documentationUrl(career), "English", "free", "beginner", "30-90 minutes", "Use the official reference while building the step deliverable. Search within it for the concepts in this roadmap step.", 2));
+            }
+            if (!resources.existsByRoadmapStepIdAndDisplayOrder(step.getId(), 3)) {
+                resources.save(new LearningResource(step, "Project inspiration for " + step.getTitle(), "GitHub", "project", githubTopic(career), "English", "free", "beginner", "2-6 hours", "Browse real projects for inspiration. Build your own version and explain your decisions instead of copying a repository.", 3));
+            } else {
+                resources.findByRoadmapStepIdAndDisplayOrder(step.getId(), 3).ifPresent(resource -> {
+                    resource.refresh("Project inspiration for " + step.getTitle(), "GitHub", "project", githubTopic(career), "English", "free", "beginner", "2-6 hours", "Browse real projects for inspiration. Build your own version and explain your decisions instead of copying a repository.");
+                    resources.save(resource);
+                });
+            }
         }
         String[][] checklist = {{"Complete your profile", "Add your education, links, and target career."}, {"Create a focused GitHub profile", "Pin your strongest repositories and add useful README files."},
             {"Publish two relevant projects", "Show complete work related to your target role."}, {"Prepare a one-page CV", "Describe outcomes, skills, and evidence clearly."},
@@ -92,6 +103,10 @@ public class SeedDataConfig {
             {"Apply with a tracking routine", "Track tailored applications and follow-ups every week."}};
         for(int index=0;index<checklist.length;index++){int order=index+1;if(!items.existsByCareerNameAndOrderIndex(career,order))items.save(new ChecklistItem(career,checklist[index][0],checklist[index][1],order));}
     }
+
+    private String documentationProvider(String career) { return switch (career) { case "Frontend Developer", "Full Stack Developer" -> "MDN Web Docs"; case "Backend Developer" -> "Spring"; case "Mobile Developer" -> "Android Developers"; case "Data Analyst" -> "Python Docs"; case "AI / Machine Learning" -> "scikit-learn"; case "Cybersecurity" -> "OWASP"; case "DevOps / Cloud" -> "Docker Docs"; default -> "Official docs"; }; }
+    private String documentationUrl(String career) { return switch (career) { case "Frontend Developer", "Full Stack Developer" -> "https://developer.mozilla.org/en-US/docs/Learn"; case "Backend Developer" -> "https://docs.spring.io/spring-boot/index.html"; case "Mobile Developer" -> "https://developer.android.com/docs"; case "Data Analyst" -> "https://docs.python.org/3/"; case "AI / Machine Learning" -> "https://scikit-learn.org/stable/"; case "Cybersecurity" -> "https://owasp.org/www-project-web-security-testing-guide/"; case "DevOps / Cloud" -> "https://docs.docker.com/"; default -> "https://developer.mozilla.org/"; }; }
+    private String githubTopic(String career) { return switch (career) { case "Frontend Developer" -> "https://github.com/topics/frontend"; case "Backend Developer" -> "https://github.com/topics/spring-boot"; case "Mobile Developer" -> "https://github.com/topics/android"; case "Data Analyst" -> "https://github.com/topics/data-analysis"; case "AI / Machine Learning" -> "https://github.com/topics/machine-learning"; case "Cybersecurity" -> "https://github.com/topics/cybersecurity"; case "DevOps / Cloud" -> "https://github.com/topics/devops"; case "Full Stack Developer" -> "https://github.com/topics/full-stack"; default -> "https://github.com/topics"; }; }
 
     private void addCareerPath(CareerPathRepository repository, String name, String description) {
         if (repository.findAll().stream().noneMatch(path -> path.getName().equals(name))) {
