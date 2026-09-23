@@ -1,0 +1,4 @@
+import { Component, OnInit, inject } from '@angular/core'; import { HttpClient } from '@angular/common/http'; import { ActivatedRoute, RouterLink } from '@angular/router';
+type Project={name:string;description:string;technologies:string;githubUrl:string;liveDemoUrl:string}; type Portfolio={username:string;fullName:string;targetCareer:string;githubUrl:string;linkedinUrl:string;headline:string;bio:string;projects:Project[]};
+@Component({selector:'app-public-portfolio',imports:[RouterLink],templateUrl:'./public-portfolio.component.html',styleUrl:'./public-portfolio.component.css'})
+export class PublicPortfolioComponent implements OnInit{private http=inject(HttpClient);private route=inject(ActivatedRoute);portfolio:Portfolio|null=null;notFound=false;ngOnInit(){const username=this.route.snapshot.paramMap.get('username');this.http.get<Portfolio>(`http://localhost:8080/api/portfolio/public/${username}`).subscribe({next:p=>this.portfolio=p,error:()=>this.notFound=true});}}

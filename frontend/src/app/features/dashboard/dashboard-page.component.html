@@ -1,0 +1,85 @@
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" routerLink="/dashboard" aria-label="CareerPath home">
+      <span class="brand-mark">C</span>
+      <span>CareerPath</span>
+      <small>Beta</small>
+    </a>
+
+    <nav>
+      <a class="nav-item" routerLink="/dashboard" routerLinkActive="active">Overview</a>
+      <a class="nav-item" routerLink="/profile" routerLinkActive="active">Profile &amp; career</a>
+      <a class="nav-item" routerLink="/assessment" routerLinkActive="active">Assessment</a>
+      <a class="nav-item" href="#">My roadmap</a>
+      <a class="nav-item" href="#">Projects &amp; portfolio</a>
+      <a class="nav-item" href="#">Career checklist</a>
+      <a class="nav-item" href="#">Freelancing guide</a>
+    </nav>
+
+    <div class="student-summary">
+      <span class="avatar">YS</span>
+      <span><strong>{{ profile().fullName }}</strong><small>{{ profile().academicYear }} · {{ profile().targetCareer }}</small><a routerLink="/login">Sign in</a></span>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <span>Your career launchpad</span>
+      <span class="preview-label">Beta preview</span>
+      <span class="avatar avatar-light">{{ profile().fullName.slice(0, 2).toUpperCase() }}</span>
+    </header>
+
+    <section class="content">
+      <p class="eyebrow">Your workspace</p>
+      <h1>Make your next move count, {{ profile().fullName }}.</h1>
+      <p class="intro">A clear path from learning computer science to showing what you can do.</p>
+
+      <section class="career-card">
+        <div>
+          <p class="eyebrow">Your chosen direction</p>
+          <div class="path-heading"><strong>{{ profile().targetCareer }}</strong><span>Starter path</span></div>
+          <div class="progress-label"><strong>{{ progress }}% complete</strong><span>5 of 14 roadmap steps</span></div>
+          <div class="progress-track" role="progressbar" aria-label="Roadmap progress" [attr.aria-valuenow]="progress" aria-valuemin="0" aria-valuemax="100">
+            <span [style.width.%]="progress"></span>
+          </div>
+        </div>
+        <div class="next-step">
+          <p class="next-step-label">Your next step</p>
+          <h2>JavaScript: events &amp; the DOM</h2>
+          <p>Practice by adding interactions to a small web page · about 90 min</p>
+          <button type="button">Continue roadmap <span aria-hidden="true">→</span></button>
+        </div>
+      </section>
+
+      <section class="stats" aria-label="Your progress at a glance">
+        <article><strong>5 / 14</strong><span>Roadmap steps</span></article>
+        <article><strong>1 project</strong><span>In your portfolio</span></article>
+        <article><strong>3 / 7</strong><span>Career checklist</span></article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel">
+          <div class="panel-header"><div><h2>Roadmap preview</h2><p>Learn the skill, then put it to work.</p></div><a href="#">View roadmap</a></div>
+          <ol class="roadmap-list">
+            @for (step of roadmapSteps; track step.title; let index = $index) {
+              <li [class]="step.status">
+                <span class="step-mark">{{ step.status === 'complete' ? '✓' : index + 1 }}</span>
+                <span><strong>{{ step.title }}</strong><small>{{ step.description }}</small></span>
+              </li>
+            }
+          </ol>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header"><div><h2>Career-ready basics</h2><p>Small steps make your work easier to find.</p></div><a href="#">See all</a></div>
+          <ul class="checklist">
+            <li><span class="check">✓</span><span><strong>Add your first project</strong><small>Campus Events Planner</small></span></li>
+            <li><span class="check">✓</span><span><strong>Set up your GitHub profile</strong><small>Profile and pinned repositories</small></span></li>
+            <li><span class="check pending">→</span><span><strong>Write a short project summary</strong><small>A clear first improvement to make</small></span></li>
+          </ul>
+          <div class="project-row"><span class="project-art">&lt;/&gt;</span><span><strong>Campus Events Planner</strong><small>React · TypeScript · GitHub connected</small></span><span aria-hidden="true">↗</span></div>
+        </article>
+      </section>
+    </section>
+  </main>
+</div>

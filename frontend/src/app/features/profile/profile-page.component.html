@@ -1,0 +1,53 @@
+<div class="profile-shell">
+  <header class="profile-header">
+    <a routerLink="/dashboard" class="brand"><span>Ｃ</span>CareerPath <small>Beta</small></a>
+    <a routerLink="/dashboard" class="back-link">← Back to dashboard</a>
+  </header>
+
+  <main class="profile-content">
+    <p class="eyebrow">Your starting point</p>
+    <h1>Tell us where you are headed.</h1>
+    <p class="intro">These details shape your dashboard and give you a career path you can change at any time.</p>
+
+    <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" novalidate>
+      <section class="form-card">
+        <div class="section-heading"><h2>About you</h2><p>Keep this simple for now. You can add more later.</p></div>
+        <div class="field-grid">
+          <label class="field field-wide">Full name
+            <input formControlName="fullName" autocomplete="name" placeholder="Your name">
+            @if (profileForm.controls.fullName.touched && profileForm.controls.fullName.invalid) { <span class="error">Please enter your name.</span> }
+          </label>
+          <label class="field">University
+            <input formControlName="university" autocomplete="organization" placeholder="Example University">
+          </label>
+          <label class="field">Academic year
+            <select formControlName="academicYear">
+              <option>Year 1</option><option>Year 2</option><option>Year 3</option><option>Year 4</option><option>Graduate</option>
+            </select>
+          </label>
+          <label class="field">GitHub link <span class="optional">optional</span>
+            <input formControlName="githubUrl" type="url" autocomplete="url" placeholder="https://github.com/username">
+          </label>
+          <label class="field">LinkedIn link <span class="optional">optional</span>
+            <input formControlName="linkedinUrl" type="url" autocomplete="url" placeholder="https://linkedin.com/in/username">
+          </label>
+        </div>
+      </section>
+
+      <section class="form-card">
+        <div class="section-heading"><h2>What do you want to explore?</h2><p>Choose one direction. This is guidance, not a permanent decision.</p></div>
+        <div class="career-grid">
+          @for (career of careerPaths; track career.value) {
+            <label class="career-option" [class.selected]="profileForm.controls.targetCareer.value === career.value">
+              <input formControlName="targetCareer" type="radio" [value]="career.value">
+              <span><strong>{{ career.value }}</strong><small>{{ career.description }}</small></span>
+            </label>
+          }
+        </div>
+      </section>
+
+      @if (saveError) { <p class="save-error" role="alert">{{ saveError }}</p> }
+      <div class="form-actions"><a routerLink="/dashboard">Cancel</a><button type="submit">Save and view dashboard →</button></div>
+    </form>
+  </main>
+</div>

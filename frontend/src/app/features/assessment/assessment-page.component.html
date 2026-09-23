@@ -1,0 +1,41 @@
+<main class="assessment-shell">
+  <header><a routerLink="/dashboard" class="brand"><span>Ｃ</span>CareerPath <small>Beta</small></a><a routerLink="/dashboard">← Dashboard</a></header>
+  <section class="assessment-content">
+    @if (recommendations.length) {
+      <p class="eyebrow">Your starting directions</p>
+      <h1>Here are paths worth exploring.</h1>
+      <p class="intro">These are suggestions based on your answers. Pick one to update your Dashboard, or change it later from your Profile.</p>
+      <div class="recommendation-list">
+        @for (recommendation of recommendations; track recommendation.name; let first = $first) {
+          <article class="recommendation" [class.first]="first">
+            <span class="rank">{{ first ? 'Best match' : 'Also explore' }}</span>
+            <h2>{{ recommendation.name }}</h2>
+            <p>{{ recommendation.description }}</p>
+            <button type="button" (click)="useCareerPath(recommendation)">Use this path →</button>
+          </article>
+        }
+      </div>
+      <button type="button" class="submit" (click)="retake()">Retake assessment</button>
+    } @else {
+      <p class="eyebrow">Career assessment</p>
+      <h1>Find a direction to explore.</h1>
+      <p class="intro">Answer three short questions. There is no permanent choice here: this only gives you a practical starting point.</p>
+      @if (isLoading) { <p class="state-message">Loading your assessment…</p> }
+      @if (errorMessage) { <p class="state-message error" role="alert">{{ errorMessage }}</p> }
+      @if (!isLoading && questions.length) {
+        <div class="question-list">
+          @for (question of questions; track question.id; let index = $index) {
+            <section class="question-card"><span class="question-number">{{ index + 1 }}</span><h2>{{ question.prompt }}</h2>
+              <div class="choices">
+                @for (choice of question.choices; track choice.value) {
+                  <button type="button" class="choice" [class.selected]="answers[question.id] === choice.value" (click)="selectAnswer(question.id, choice.value)">{{ choice.label }}</button>
+                }
+              </div>
+            </section>
+          }
+        </div>
+        <button type="button" class="submit" [disabled]="isSubmitting" (click)="submit()">{{ isSubmitting ? 'Finding your direction…' : 'See my suggested paths →' }}</button>
+      }
+    }
+  </section>
+</main>
