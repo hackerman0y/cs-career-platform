@@ -27,12 +27,13 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class AssessmentService {
     private static final Map<String, List<ChoiceResponse>> CHOICES = Map.of(
-            "build", List.of(choice("frontend", "Create polished web interfaces"), choice("backend", "Design APIs and systems"), choice("mobile", "Build apps for phones"), choice("data", "Find insights in data")),
-            "project", List.of(choice("frontend", "A portfolio website or product interface"), choice("backend", "A service with users and a database"), choice("mobile", "A mobile app for everyday tasks"), choice("data", "A dashboard that explains a real problem")),
-            "strength", List.of(choice("frontend", "Making experiences clear and easy to use"), choice("backend", "Organizing complex logic and solving technical problems"), choice("mobile", "Turning ideas into useful experiences on the go"), choice("data", "Spotting patterns and explaining what they mean")));
+            "build", List.of(choice("frontend", "Create polished web interfaces"), choice("backend", "Design APIs and systems"), choice("mobile", "Build apps for phones"), choice("data", "Find insights in data"), choice("ai", "Build intelligent products with data"), choice("security", "Protect systems and investigate risks"), choice("cloud", "Automate delivery and cloud infrastructure"), choice("fullstack", "Build a complete product end to end")),
+            "project", List.of(choice("frontend", "A portfolio website or product interface"), choice("backend", "A service with users and a database"), choice("mobile", "A mobile app for everyday tasks"), choice("data", "A dashboard that explains a real problem"), choice("ai", "A model that solves a real prediction problem"), choice("security", "A documented legal security lab or defensive tool"), choice("cloud", "A deployed application with a CI/CD pipeline"), choice("fullstack", "A complete app with users, APIs, and deployment")),
+            "strength", List.of(choice("frontend", "Making experiences clear and easy to use"), choice("backend", "Organizing complex logic and solving technical problems"), choice("mobile", "Turning ideas into useful experiences on the go"), choice("data", "Spotting patterns and explaining what they mean"), choice("ai", "Experimenting with data and improving models"), choice("security", "Finding weaknesses and thinking about risk"), choice("cloud", "Making systems reliable and repeatable"), choice("fullstack", "Connecting many parts into one useful product")));
 
     private static final Map<String, String> CAREER_FOR_ANSWER = Map.of(
-            "frontend", "Frontend Developer", "backend", "Backend Developer", "mobile", "Mobile Developer", "data", "Data Analyst");
+            "frontend", "Frontend Developer", "backend", "Backend Developer", "mobile", "Mobile Developer", "data", "Data Analyst",
+            "ai", "AI / Machine Learning", "security", "Cybersecurity", "cloud", "DevOps / Cloud", "fullstack", "Full Stack Developer");
 
     private final AssessmentQuestionRepository questionRepository;
     private final AssessmentAnswerRepository answerRepository;

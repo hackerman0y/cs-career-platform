@@ -1,6 +1,6 @@
 # Beta implementation plan
 
-Status: MVP implemented and ready for full manual testing.
+Status: Job-readiness expansion implemented and ready for full manual testing.
 
 ## Foundation
 
@@ -38,20 +38,36 @@ Status: MVP implemented and ready for full manual testing.
 
 ## Next product phase: guided execution
 
+### Implemented job-readiness foundation
+
+- [x] Expanded career catalog: AI / Machine Learning, Cybersecurity, DevOps / Cloud, and Full Stack Developer.
+- [x] Expanded assessment choices and recommendations for all supported paths.
+- [x] Seeded a seven-step roadmap and practical learning resource for every supported path.
+- [x] Added a readiness score based on automatically verified profile, assessment, GitHub, LinkedIn, projects, portfolio, roadmap, and checklist evidence.
+- [x] Added a student-owned opportunity workspace with a transparent requirements-fit evaluation.
+- [x] Added an application tracker with saved, preparing, applied, interview, offer, rejected, and withdrawn states.
+
 ### Smart progress tracking
 
-- Add evidence and completion-source fields to roadmap and checklist progress.
+- [x] Add automatic evidence records and completion source for verified job-readiness milestones.
 - Add completion states: not started, in progress, automatic, manual, and needs review.
-- Build a rule engine triggered by profile, assessment, project, portfolio, learning, and integration events.
-- Automatically verify the first rules: complete profile, assessment result, GitHub link, qualifying project, published portfolio, and two qualifying projects.
-- Show the student why an item is complete and what evidence is still missing.
+- Extend the rule engine with explicit roadmap/checklist completion states and manual review.
+- Extend automatic verification to project checkpoints and external integrations.
 
 ### Roadmap learning resources
 
-- Add learning resources to every roadmap step: videos, playlists, documentation, articles, courses, exercises, and projects.
+- [x] Add an initial free learning resource to every roadmap step.
 - Store language, cost, difficulty, duration, provider, verification state, and last link check.
-- Add learning outcomes, estimated time, practice, and an evidence-producing checkpoint to every step.
+- Add curated video, documentation, exercise, and mini-project resources for every step.
 - Create admin management and student broken-link reporting.
+
+### Job execution
+
+- [x] Save student-owned Job and Internship opportunities with listing links and requirements.
+- [x] Generate live LinkedIn search links for internships and entry-level roles based on the student's target career in Egypt.
+- [x] Compare the student’s projects and target career to listed requirements.
+- [x] Track application status, application date, follow-up date, notes, and outcome.
+- [x] Record every application status change as an application event.
 
 ### First-client freelancing system
 

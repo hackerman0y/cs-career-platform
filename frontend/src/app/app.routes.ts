@@ -16,6 +16,9 @@ export const routes: Routes = [
   { path: 'projects', component: CareerWorkspaceComponent, data: { view: 'projects' } },
   { path: 'portfolio', component: CareerWorkspaceComponent, data: { view: 'portfolio' } },
   { path: 'checklist', component: CareerWorkspaceComponent, data: { view: 'checklist' } },
+  { path: 'readiness', component: CareerWorkspaceComponent, data: { view: 'readiness' } },
+  { path: 'opportunities', component: CareerWorkspaceComponent, data: { view: 'opportunities' } },
+  { path: 'applications', component: CareerWorkspaceComponent, data: { view: 'applications' } },
   { path: 'freelancing', component: CareerWorkspaceComponent, data: { view: 'freelancing' } },
   { path: 'p/:username', component: PublicPortfolioComponent },
   { path: '**', redirectTo: 'dashboard' }

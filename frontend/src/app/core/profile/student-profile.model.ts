@@ -1,4 +1,4 @@
-export type CareerPath = 'Frontend Developer' | 'Backend Developer' | 'Mobile Developer' | 'Data Analyst';
+export type CareerPath = 'Frontend Developer' | 'Backend Developer' | 'Mobile Developer' | 'Data Analyst' | 'AI / Machine Learning' | 'Cybersecurity' | 'DevOps / Cloud' | 'Full Stack Developer';
 
 export interface StudentProfile {
   fullName: string;
@@ -8,4 +8,3 @@ export interface StudentProfile {
   linkedinUrl: string;
   targetCareer: CareerPath;
 }
-

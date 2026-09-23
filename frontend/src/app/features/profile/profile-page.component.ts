@@ -19,7 +19,11 @@ export class ProfilePageComponent implements OnInit {
     { value: 'Frontend Developer', description: 'Build clear, responsive experiences for the web.' },
     { value: 'Backend Developer', description: 'Design APIs, databases, and the systems behind products.' },
     { value: 'Mobile Developer', description: 'Create useful experiences for Android and iOS.' },
-    { value: 'Data Analyst', description: 'Use data to find patterns and support better decisions.' }
+    { value: 'Data Analyst', description: 'Use data to find patterns and support better decisions.' },
+    { value: 'AI / Machine Learning', description: 'Build intelligent products with data, models, and evaluation.' },
+    { value: 'Cybersecurity', description: 'Protect systems, networks, and users through practical security work.' },
+    { value: 'DevOps / Cloud', description: 'Automate delivery and build dependable cloud infrastructure.' },
+    { value: 'Full Stack Developer', description: 'Build complete products from interface to deployment.' }
   ];
 
   readonly profileForm = this.formBuilder.nonNullable.group({

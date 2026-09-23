@@ -47,6 +47,29 @@ class CareerPlatformJourneyTest {
                 """)).andExpect(status().isCreated()).andReturn().getResponse().getContentAsString();
         assertThat(json.readTree(created).get("name").asText()).isEqualTo("Test API");
 
+        mvc.perform(get("/api/readiness").header("Authorization", bearer)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.score").isNumber()).andExpect(jsonPath("$.evidence.length()").value(2));
+
+        mvc.perform(get("/api/opportunities/discover").header("Authorization", bearer)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2)).andExpect(jsonPath("$[0].provider").value("LinkedIn"));
+
+        String resources = mvc.perform(get("/api/roadmap/{id}/resources", stepId).header("Authorization", bearer))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.length()").value(1))
+                .andReturn().getResponse().getContentAsString();
+        assertThat(json.readTree(resources).get(0).get("provider").asText()).isEqualTo("YouTube");
+
+        String opportunity = mvc.perform(post("/api/opportunities").header("Authorization", bearer).contentType(MediaType.APPLICATION_JSON).content("""
+                {"title":"Backend Internship","company":"CareerPath Labs","opportunityType":"internship","url":"https://example.test/role","description":"Build and test APIs.","requirements":"Java, Spring Boot, SQL"}
+                """)).andExpect(status().isCreated()).andReturn().getResponse().getContentAsString();
+        String opportunityId = json.readTree(opportunity).get("id").asText();
+        mvc.perform(get("/api/opportunities/{id}/fit", opportunityId).header("Authorization", bearer)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.score").value(67)).andExpect(jsonPath("$.decision").value("prepare"));
+        mvc.perform(post("/api/applications").header("Authorization", bearer).contentType(MediaType.APPLICATION_JSON).content("""
+                {"opportunityId":"%s","status":"applied","appliedAt":"2026-09-23","followUpDate":"2026-09-30","notes":"Tailored CV sent.","outcome":""}
+                """.formatted(opportunityId))).andExpect(status().isCreated()).andExpect(jsonPath("$.status").value("applied"));
+        mvc.perform(get("/api/applications").header("Authorization", bearer)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1));
+
         mvc.perform(get("/api/portfolio").header("Authorization", bearer)).andExpect(status().isOk());
         mvc.perform(put("/api/portfolio").header("Authorization", bearer).contentType(MediaType.APPLICATION_JSON).content("""
                 {"username":"journey-student","headline":"Backend Developer","bio":"Building useful APIs.","published":true}

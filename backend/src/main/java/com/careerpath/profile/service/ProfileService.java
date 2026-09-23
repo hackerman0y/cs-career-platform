@@ -32,8 +32,7 @@ public class ProfileService {
     }
 
     private StudentProfile findProfile(String email) {
-        AppUser user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
+        AppUser user = userForEmail(email);
         return profileRepository.findByUser(user)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile was not found."));
     }
@@ -45,5 +44,10 @@ public class ProfileService {
 
     private String optionalValue(String value) {
         return value == null ? "" : value.trim();
+    }
+
+    public AppUser userForEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
     }
 }
