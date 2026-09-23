@@ -1,17 +1,31 @@
 <div class="shell">
- <aside><a class="brand" routerLink="/dashboard"><img src="assets/careera-mark.svg" alt=""><span>Careera<small>Career execution</small></span></a><nav>
-  <a routerLink="/dashboard" routerLinkActive="active">Overview</a><a routerLink="/profile" routerLinkActive="active">Profile & career</a><a routerLink="/assessment" routerLinkActive="active">Assessment</a>
-  <a routerLink="/readiness" routerLinkActive="active">Job readiness</a><a routerLink="/roadmap" routerLinkActive="active">My roadmap</a><a routerLink="/projects" routerLinkActive="active">Projects</a><a routerLink="/portfolio" routerLinkActive="active">Portfolio</a><a routerLink="/opportunities" routerLinkActive="active">Opportunities</a><a routerLink="/applications" routerLinkActive="active">Applications</a><a routerLink="/checklist" routerLinkActive="active">Career checklist</a><a routerLink="/freelancing" routerLinkActive="active">Freelancing guide</a>
+ <aside><a class="brand" routerLink="/dashboard"><img src="assets/careera-mark.svg" alt=""><span>Careera<small>Explore · Build · Apply</small></span></a><nav>
+  <a routerLink="/dashboard" routerLinkActive="active"><i>⌂</i>Overview</a><a routerLink="/profile" routerLinkActive="active"><i>◉</i>Profile & career</a><a routerLink="/assessment" routerLinkActive="active"><i>⌁</i>Assessment</a>
+  <a routerLink="/readiness" routerLinkActive="active"><i>◌</i>Job readiness</a><a routerLink="/roadmap" routerLinkActive="active"><i>↗</i>My roadmap</a><a routerLink="/projects" routerLinkActive="active"><i>⌘</i>Projects</a><a routerLink="/portfolio" routerLinkActive="active"><i>▣</i>Portfolio</a><a routerLink="/opportunities" routerLinkActive="active"><i>◇</i>Opportunities</a><a routerLink="/applications" routerLinkActive="active"><i>✓</i>Applications</a><a routerLink="/checklist" routerLinkActive="active"><i>☷</i>Career checklist</a><a routerLink="/freelancing" routerLinkActive="active"><i>✦</i>Freelancing guide</a>
  </nav><div class="account"><b>{{profile().fullName}}</b><small>{{profile().targetCareer}}</small><button (click)="logout()">Sign out</button></div></aside>
  <main><header><span>Careera</span><a routerLink="/profile">Edit profile</a></header><section class="page">
   @if(error){<div class="alert">{{error}} <button (click)="load()">Try again</button></div>}
   @if(loading){<div class="loading">Loading your workspace…</div>}
 
   @if(!loading && view==='overview'){
-   <p class="eyebrow">YOUR WORKSPACE</p><h1>Welcome back, {{profile().fullName}}.</h1><p class="lead">Turn your {{profile().targetCareer}} goal into visible evidence and focused applications.</p>
-   <div class="hero"><div><small>Job readiness</small><strong>{{readiness?.score || 0}}%</strong><div class="bar"><i [style.width.%]="readiness?.score || 0"></i></div><a routerLink="/readiness">See what improves your score →</a></div><div><small>Today’s next action</small><h2>{{actionToday?.title || 'Choose your career path'}}</h2><p>{{actionToday?.action || 'Complete your profile to build a personalized plan.'}}</p></div></div>
-   <div class="metrics"><article><b>{{completedSteps}} / {{steps.length}}</b><span>Roadmap steps</span></article><article><b>{{projects.length}}</b><span>Portfolio projects</span></article><article><b>{{applications.length}}</b><span>Applications tracked</span></article></div>
-   <div class="grid"><article class="card"><h2>Roadmap preview</h2>@for(s of steps.slice(0,3);track s.id){<div class="row"><span [class.done]="s.completed">{{s.completed?'✓':s.orderIndex}}</span><div><b>{{s.title}}</b><small>{{s.description}}</small></div></div>}<a routerLink="/roadmap">View full roadmap</a></article><article class="card"><h2>Readiness evidence</h2><div class="big">{{readiness?.evidence?.length || 0}}</div><p>Verified items from your profile, projects, portfolio, assessment, and practical progress.</p><a routerLink="/readiness">Open readiness profile</a></article></div>
+   <p class="eyebrow">YOUR CAREER QUEST</p><h1>Your next chapter starts here, {{profile().fullName}}.</h1><p class="lead">Follow the path from a clear direction to proof, opportunities, and your first offer.</p>
+   <section class="quest-hero">
+    <div class="quest-scene" aria-label="Your five-stage career journey">
+      <div class="scene-copy"><span>CAREERA JOURNEY</span><strong>Small proof.<br>Real momentum.</strong></div>
+      <div class="trail"></div>
+      <a class="quest-stop discover" routerLink="/assessment"><b>1</b><span><strong>Discover</strong><small>Choose your direction</small></span></a>
+      <a class="quest-stop learn" routerLink="/roadmap"><b>2</b><span><strong>Learn</strong><small>Build core skills</small></span></a>
+      <a class="quest-stop build" routerLink="/projects"><b>3</b><span><strong>Build</strong><small>Create real projects</small></span></a>
+      <a class="quest-stop prove" routerLink="/portfolio"><b>4</b><span><strong>Prove</strong><small>Show your evidence</small></span></a>
+      <a class="quest-stop apply" routerLink="/opportunities"><b>5</b><span><strong>Apply</strong><small>Find the right role</small></span></a>
+    </div>
+    <div class="quest-side">
+      <article class="readiness-orb"><p>JOB READINESS</p><div class="score-ring" [style.--score]="readiness?.score || 0"><b>{{readiness?.score || 0}}<small>/100</small></b></div><strong>{{(readiness?.score || 0) >= 65 ? 'On your way' : 'Build your momentum'}}</strong><span>Every completed step makes your application stronger.</span><a routerLink="/readiness">View recommendations →</a></article>
+      <article class="next-quest"><p>NEXT QUEST <span>HIGH IMPACT</span></p><h2>{{actionToday?.title || 'Choose your career path'}}</h2><p>{{actionToday?.action || 'Complete your profile to build a personalized plan.'}}</p><a routerLink="/roadmap">Continue journey →</a></article>
+    </div>
+   </section>
+   <div class="metrics"><article><i>↗</i><b>{{completedSteps}} / {{steps.length}}</b><span>Journey steps</span></article><article><i>⌘</i><b>{{projects.length}}</b><span>Projects built</span></article><article><i>✓</i><b>{{applications.length}}</b><span>Applications tracked</span></article></div>
+   <div class="grid"><article class="card journey-preview"><div class="card-heading"><div><p class="eyebrow">YOUR PATH</p><h2>Keep moving forward</h2></div><a routerLink="/roadmap">See roadmap →</a></div>@for(s of steps.slice(0,3);track s.id){<div class="row"><span [class.done]="s.completed">{{s.completed?'✓':s.orderIndex}}</span><div><b>{{s.title}}</b><small>{{s.description}}</small></div><em>{{s.completed?'Done':'Open step'}}</em></div>}</article><article class="card evidence-card"><p class="eyebrow">PROOF COLLECTED</p><div class="big">{{readiness?.evidence?.length || 0}}</div><h2>Pieces of career evidence</h2><p>Projects, profile details, skills, and portfolio work become the proof behind your score.</p><a routerLink="/readiness">See my evidence →</a></article></div>
   }
 
   @if(!loading && view==='readiness' && readiness){

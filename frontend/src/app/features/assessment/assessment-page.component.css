@@ -9,3 +9,6 @@ header > a:last-child { color: #4b56c8; font-size: 12px; font-weight: 600; text-
 
 
 .brand > img { height: 30px; width: 30px; }
+
+/* Careera Career Quest theme */
+.assessment-shell{background:radial-gradient(circle at 90% 0,#d9f0ed 0,transparent 29%),#f3f7f8;color:#092237}header{background:#ffffffdc;border-color:#d7e5e7;backdrop-filter:blur(10px)}header > a:last-child{color:#197e7d}.brand{color:#092237}.brand small{border-color:#c8dfe0;color:#287d84}.eyebrow{color:#278982}.intro,.recommendation p{color:#5d7785}.question-card,.recommendation{border-color:#d5e5e7;border-radius:16px;box-shadow:0 8px 22px #1b50600a}.question-number,.rank{background:#e5f6f3;color:#197e7d}.choice{border-color:#cbdbdf;color:#29495a}.choice:hover,.choice.selected{background:#effaf9;border-color:#55aaa4;color:#146d6d}.submit,.recommendation button{background:#167e7b}.recommendation.first{border-color:#86c9c1}
