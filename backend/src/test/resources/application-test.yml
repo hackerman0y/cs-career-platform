@@ -4,3 +4,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+
+app:
+  security:
+    jwt-secret: test-only-jwt-secret-with-at-least-thirty-two-characters

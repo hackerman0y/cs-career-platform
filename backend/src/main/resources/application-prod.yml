@@ -1,4 +1,7 @@
 spring:
+  h2:
+    console:
+      enabled: false
   datasource:
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}
@@ -8,3 +11,6 @@ spring:
     hibernate:
       ddl-auto: validate
 
+app:
+  security:
+    jwt-secret: ${JWT_SECRET:}

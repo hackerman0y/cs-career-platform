@@ -21,7 +21,8 @@ public class RoadmapController {
         return steps.findByCareerNameOrderByOrderIndex(career).stream().map(s->{var p=done.get(s.getId());return new StepResponse(s.getId(),s.getTitle(),s.getDescription(),s.getOrderIndex(),p!=null&&p.isCompleted(),p==null?null:p.getCompletedAt());}).toList();
     }
     @PutMapping("/{stepId}") @Transactional public StepResponse update(@PathVariable UUID stepId,@RequestBody UpdateRequest request,Principal principal){
-        AppUser user=user(principal); RoadmapStep step=steps.findById(stepId).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+        AppUser user=user(principal); String career=profiles.findByUser(user).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND)).getTargetCareer();
+        RoadmapStep step=steps.findById(stepId).filter(candidate -> candidate.getCareerName().equals(career)).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         RoadmapProgress saved=progress.findByUserAndStep(user,step).orElseGet(()->new RoadmapProgress(user,step)); saved.setCompleted(request.completed()); progress.save(saved);
         if(request.completed()) inferredSkills(step).forEach(name -> skills.findByUserAndNameIgnoreCase(user,name).orElseGet(()->skills.save(new StudentSkill(user,name,"beginner","roadmap"))));
         return new StepResponse(step.getId(),step.getTitle(),step.getDescription(),step.getOrderIndex(),saved.isCompleted(),saved.getCompletedAt());

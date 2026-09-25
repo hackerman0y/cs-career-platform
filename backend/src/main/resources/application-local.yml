@@ -1,0 +1,11 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  h2:
+    console:
+      enabled: true
+
+app:
+  security:
+    jwt-secret: ${JWT_SECRET:careerpath-local-development-secret-change-before-production-2026}
